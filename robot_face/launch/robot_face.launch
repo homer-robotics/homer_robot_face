@@ -1,0 +1,6 @@
+<launch>
+    <!-- Start RobotFace node -->
+    <!--<node ns="/robot_face" name="RobotFace" pkg="robot_face" type="RobotFace" cwd="node" output="screen" />-->
+    <node ns="/robot_face" name="RobotFace" pkg="robot_face" type="RobotFace" cwd="node"/>
+    <node name="FestivalSynthesizer" pkg="robot_face" type="FestivalSynthesizer" cwd="node" output="screen"/>
+</launch>
