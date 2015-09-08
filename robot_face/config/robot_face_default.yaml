@@ -1,0 +1,25 @@
+/robot_face/sMeshFilename:          Lisa
+################# Head: RGB (RGB Color Values)
+#/robot_face/vHeadColor:             [1.0,1.0,1.0]
+/robot_face/fHeadColorR:            1.0
+/robot_face/fHeadColorG:            1.0
+/robot_face/fHeadColorB:            1.0
+
+################# Iris: RGB (RGB Color Values) 
+#/robot_face/vIrisColor:             [1.0,0.0,1.0]
+/robot_face/fIrisColorR:            1.0
+/robot_face/fIrisColorG:            0.0
+/robot_face/fIrisColorB:            1.0
+
+################# Outline Color (RGB Color Values)
+#/robot_face/vOutlineColor:          [100,0.0,0.0]
+/robot_face/fOutlineColorR:         0.0
+/robot_face/fOutlineColorG:         0.0
+/robot_face/fOutlineColorB:         0.0
+
+/robot_face/sVoice:                 female
+
+################# Window values
+/robot_face/iWidth:                 600
+/robot_face/iHeight:                800
+/robot_face/iRotation:              0    #### allowed values are [0, 90, 180, 270] 

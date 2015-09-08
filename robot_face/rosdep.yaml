@@ -1,0 +1,11 @@
+pulse:
+  arch: libpulse
+  ubuntu: libpulse-dev
+festival:
+  ubuntu: festival festvox-kallpc16k
+mbrola:
+  arch: |
+    if ! pacman -Q mbrola mbrola-voices-us1; then packer -S mbrola mbrola-voices-us1; fi
+  ubuntu: mbrola mbrola-us1
+qt4:
+  ubuntu: libqt4-dev qt4-dev-tools
