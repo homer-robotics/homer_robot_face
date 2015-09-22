@@ -19,6 +19,8 @@
 	<build_depend>message_generation</build_depend>
 	<run_depend>message_runtime</run_depend>
 	<build_depend>genmsg</build_depend>
+	<build_depend>cmake_modules</build_depend>
+	<run_depend>cmake_modules</run_depend>
 
 	<build_depend>roslang</build_depend>
 	<build_depend>std_msgs</build_depend>
