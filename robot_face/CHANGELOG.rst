@@ -2,8 +2,8 @@
 Changelog for package robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.3 (2016-01-01)
+------------------
 * added maintainers
 * updated changelog
 * added missing dependencies
