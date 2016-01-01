@@ -11,10 +11,10 @@ tracks:
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc}
     devel_branch: null
-    last_version: 1.0.2
+    last_version: 1.0.3
     name: homer_robot_face
     patches: null
-    release_inc: '2'
+    release_inc: '0'
     release_repo_url: git@gitlab.uni-koblenz.de:robbie/homer_robot_face.git
     release_tag: :{version}
     ros_distro: indigo
