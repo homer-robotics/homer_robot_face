@@ -1,3 +1,24 @@
+## homer_robot_face (indigo) - 1.0.3-0
+
+The packages in the `homer_robot_face` repository were released into the `indigo` distro by running `/usr/bin/bloom-release --rosdistro indigo --track indigo homer_robot_face --edit` on `Fri, 01 Jan 2016 23:16:34 -0000`
+
+The `robot_face` package was released.
+
+Version of package(s) in repository `homer_robot_face`:
+- upstream repository: https://gitlab.uni-koblenz.de/robbie/homer_robot_face.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `1.0.2-2`
+- new version: `1.0.3-0`
+
+Versions of tools used:
+- bloom version: `0.5.20`
+- catkin_pkg version: `0.2.10`
+- rosdep version: `0.11.4`
+- rosdistro version: `0.4.2`
+- vcstools version: `0.1.38`
+
+
 ## homer_robot_face (indigo) - 1.0.2-2
 
 The packages in the `homer_robot_face` repository were released into the `indigo` distro by running `/usr/bin/bloom-release --rosdistro indigo --track indigo homer_robot_face --edit` on `Fri, 09 Oct 2015 09:40:18 -0000`
