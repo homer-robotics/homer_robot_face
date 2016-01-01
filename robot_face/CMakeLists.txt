@@ -15,10 +15,10 @@ find_package(catkin REQUIRED
 )
 
 #set the default path for built executables to the "bin" directory
-INSTALL(CODE "FILE(MAKE_DIRECTORY \${ENV}\${CMAKE_INSTALL_PREFIX}${mydir})")
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+#INSTALL(CODE "FILE(MAKE_DIRECTORY \${ENV}\${CMAKE_INSTALL_PREFIX}${mydir})")
+#set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #set the default path for built libraries to the "lib" directory
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+#set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
@@ -72,7 +72,8 @@ include_directories(include
 	${QT_INCLUDE_DIR}
 	${Festival_INCLUDE_DIR}
 	${EST_INCLUDE_DIR}
-	/usr/include/OGRE/
+	${OGRE_INCLUDE_DIR}
+	#/usr/include/OGRE/
 	#../../../../experimental/Libraries/
 	#$ENV{HOMER_DIR}
 )
