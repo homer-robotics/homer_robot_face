@@ -5,7 +5,10 @@
 		An application to display a talking head on your robot for human robot interaction.
 	</description>
 	<author>AGAS/agas@uni-koblenz.de, Julian Giesen/jgiesen@uni-koblenz.de, David Gossow</author>
-	<maintainer email="raphael@uni-koblenz.de">Raphael Memmesheimer</maintainer>
+    <maintainer email="vseib@uni-koblenz.de">Viktor Seib</maintainer>
+    <maintainer email="raphael@uni-koblenz.de">Raphael Memmesheimer</maintainer>
+    <maintainer email="heuer@uni-koblenz.de">Gregor Heuer</maintainer>
+    <maintainer email="niyawe@uni-koblenz.de">Niklas Yann Wettengel</maintainer>
 	<license>LGPLv3</license>
 	<!--<logo>http://www.uni-koblenz-landau.de/koblenz/fb4/institute/icv/agpaulus/logo_institut.jpg</logo>-->
 	<buildtool_depend>catkin</buildtool_depend>
