@@ -14,7 +14,7 @@ tracks:
     last_version: 1.0.3
     name: homer_robot_face
     patches: null
-    release_inc: '1'
+    release_inc: '2'
     release_repo_url: git@gitlab.uni-koblenz.de:robbie/homer_robot_face.git
     release_tag: :{version}
     ros_distro: indigo
