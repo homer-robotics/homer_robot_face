@@ -2,6 +2,11 @@
 Changelog for package robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* added libesd0-dev dependency
+* Contributors: Niklas Yann Wettengel
+
 1.0.4 (2016-01-11)
 ------------------
 * added festival-dev dependency
