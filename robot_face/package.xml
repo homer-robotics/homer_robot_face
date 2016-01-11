@@ -20,6 +20,7 @@
 	<build_depend>genmsg</build_depend>
 	<build_depend>genmsg</build_depend>
 	<build_depend>image_transport</build_depend>
+	<build_depend>libesd0-dev</build_depend>
 	<build_depend>libestools-dev</build_depend>
 	<build_depend>libogre-dev</build_depend>
 	<build_depend>libopencv-dev</build_depend>
@@ -34,6 +35,7 @@
 	<run_depend>cv_bridge</run_depend>
 	<run_depend>festival</run_depend>
 	<run_depend>festival-dev</run_depend>
+	<run_depend>libesd0-dev</run_depend>
 	<run_depend>libestools-dev</run_depend>
 	<run_depend>libogre-dev</run_depend>
 	<run_depend>libopencv-dev</run_depend>
