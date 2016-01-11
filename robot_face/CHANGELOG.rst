@@ -2,6 +2,11 @@
 Changelog for package robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* added festival-dev dependency
+* Contributors: Niklas Yann Wettengel
+
 1.0.3 (2016-01-01)
 ------------------
 * added maintainers
