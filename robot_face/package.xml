@@ -16,6 +16,7 @@
 	<build_depend>cmake_modules</build_depend>
 	<build_depend>cv_bridge</build_depend>
 	<build_depend>festival</build_depend>
+	<build_depend>festival-dev</build_depend>
 	<build_depend>genmsg</build_depend>
 	<build_depend>genmsg</build_depend>
 	<build_depend>image_transport</build_depend>
@@ -32,6 +33,7 @@
 
 	<run_depend>cv_bridge</run_depend>
 	<run_depend>festival</run_depend>
+	<run_depend>festival-dev</run_depend>
 	<run_depend>libestools-dev</run_depend>
 	<run_depend>libogre-dev</run_depend>
 	<run_depend>libopencv-dev</run_depend>
