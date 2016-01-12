@@ -2,8 +2,8 @@
 Changelog for package robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.6 (2016-01-12)
+------------------
 * added libpulse-dev dependency
 * Contributors: Niklas Yann Wettengel
 
