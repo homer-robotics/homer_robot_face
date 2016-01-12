@@ -2,6 +2,11 @@
 Changelog for package robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* added libpulse-dev dependency
+* Contributors: Niklas Yann Wettengel
+
 1.0.5 (2016-01-11)
 ------------------
 * added libesd0-dev dependency
