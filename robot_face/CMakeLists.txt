@@ -135,6 +135,10 @@ target_link_libraries(RobotFace
 	pthread
 )
 
+install(TARGETS FestivalSynthesizer DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(TARGETS RobotFace DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(DIRECTORY include/ DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+
 #############
 ## Testing ##
 #############
