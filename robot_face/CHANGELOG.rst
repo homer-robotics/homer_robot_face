@@ -2,8 +2,8 @@
 Changelog for package robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.7 (2016-01-13)
+------------------
 * added install()
 * Contributors: Niklas Yann Wettengel
 
