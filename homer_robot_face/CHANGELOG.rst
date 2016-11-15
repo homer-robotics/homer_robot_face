@@ -2,8 +2,8 @@
 Changelog for package homer_robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.8 (2016-11-15)
+------------------
 * fix?
 * Contributors: Niklas Yann Wettengel
 
