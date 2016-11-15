@@ -32,8 +32,8 @@
 #include <ros/ros.h>
 
 //message callbacks
-#include <robot_face/ImageFileDisplay.h>    //for file from harddisk
-#include <robot_face/ImageDisplay.h>    //for stream data
+#include <homer_robot_face/DisplayImageFile.h>    //for file from harddisk
+#include <homer_robot_face/DisplayImage.h>    //for stream data
 
 /**
  * @class  ImageDisplay
@@ -50,9 +50,9 @@ class ImageDisplay : public QWidget
     /** Destructor */
     ~ImageDisplay();
     /** @brief callback for sensorMsgs::Images encapsulated in an ImageDisplay msg*/
-    void callbackImageDisplay( const robot_face::ImageDisplay::ConstPtr& image_msg );
+    void callbackImageDisplay( const homer_robot_face::DisplayImage::ConstPtr& image_msg );
     /** @brief callback for images from harddisk*/
-    void callbackImageFileDisplay(const robot_face::ImageFileDisplay::ConstPtr& image_msg );
+    void callbackImageFileDisplay(const homer_robot_face::DisplayImageFile::ConstPtr& image_msg );
 
 public slots:
     /** @brief hide the current image and stop the reset timer*/
@@ -87,7 +87,7 @@ private:
         /** @brief convert a cv::Mat to a QImage. Supported encodings are CV_8UC4, CV_8UC3 and CV_8UC1*/
         QImage cvMatToQImage( const cv::Mat &inMat );
         /** @brief actual executive process of image data for painting in the window*/
-        void processImageData(const robot_face::ImageDisplay::ConstPtr& image_msg);
+        void processImageData(const homer_robot_face::DisplayImage::ConstPtr& image_msg);
 };
 
 #endif // TALKING_HEAD_INCLUDE_IMAGEDISPLAY_H_

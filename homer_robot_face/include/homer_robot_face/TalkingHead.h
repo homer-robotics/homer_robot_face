@@ -35,7 +35,7 @@
 #include <OgreViewport.h>
 #include <OgreWindowEventUtilities.h>
 
-#include <QtGui>
+#include <QtWidgets>
 
 //messages to react to
 #include <ros/callback_queue.h>
@@ -43,8 +43,8 @@
 #include <ros/ros.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Int8.h>
-#include <robot_face/ImageDisplay.h>
-#include <robot_face/ImageFileDisplay.h>
+#include <homer_robot_face/DisplayImage.h>
+#include <homer_robot_face/DisplayImageFile.h>
 
 #include <iostream>
 #include <istream>
@@ -85,8 +85,8 @@ class TalkingHead : public QWidget, public Ogre::FrameListener, public Ogre::Win
   void callbackVisemes();
   void callbackTextForEmotion( const std_msgs::String::ConstPtr& msg );
   void callbackResetAnimation( const std_msgs::String::ConstPtr& msg);
-  void callbackShowStream(const robot_face::ImageDisplay::ConstPtr& image_msg );
-  void callbackShowImage( const robot_face::ImageFileDisplay::ConstPtr& msg );
+  void callbackShowStream(const homer_robot_face::DisplayImage::ConstPtr& image_msg );
+  void callbackShowImage( const homer_robot_face::DisplayImageFile::ConstPtr& msg );
   void callbackShowMatImage( const sensor_msgs::ImageConstPtr& msg );
 
   public slots:
@@ -95,8 +95,12 @@ class TalkingHead : public QWidget, public Ogre::FrameListener, public Ogre::Win
 
   void clearFace();
 
+  void setTimer(int msec);
+
   signals:
   void faceCleared();
+
+  void timerChanged(int msec);
 
   protected:
 

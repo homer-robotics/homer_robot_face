@@ -25,8 +25,8 @@
 
 #include <string>
 
-#include "Config.h"
-#include "FestivalSynthesizer.h"
+#include <homer_robot_face/Config.h>
+#include <homer_robot_face/FestivalSynthesizer.h>
 #include <ros/package.h>
 
 FestivalSynthesizer::FestivalSynthesizer() :
@@ -48,14 +48,14 @@ FestivalSynthesizer::~FestivalSynthesizer()
 
 void FestivalSynthesizer::initFestival()
 {
-    int heap_size = 210000;   // default scheme heap size
+    int heap_size = 10000000;   // default scheme heap size
     int load_init_files = 1;  // we want the festival init files loaded
 
     festival_initialize(load_init_files, heap_size);
 
     try
     {	
-        std::string filename = ros::package::getPath("robot_face")+"/config/config.cfg";
+        std::string filename = ros::package::getPath("homer_robot_face")+"/config/config.cfg";
         const char* cfgFilename = filename.c_str();
 
         Config cfg(cfgFilename);
@@ -130,7 +130,7 @@ void FestivalSynthesizer::initFestival()
 void FestivalSynthesizer::run()
 {
     ros::NodeHandle node_handle;
-    subscriber_ = node_handle.subscribe<std_msgs::String>( "robot_face/speak", 1000, &FestivalSynthesizer::callbackSynth, this );
+    subscriber_ = node_handle.subscribe<std_msgs::String>( "robot_face/text_out", 1000, &FestivalSynthesizer::callbackSynth, this );
 
     // Subscribe to ROS message
     talking_finished_publisher_ = node_handle.advertise<std_msgs::String>( "robot_face/talking_finished", 1 );

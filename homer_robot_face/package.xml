@@ -1,0 +1,50 @@
+<package>
+  <name>homer_robot_face</name>
+  <version>0.1.0</version>
+  <description> 
+     An application to display a talking head on your robot for human robot interaction.
+  </description>
+  <author>AGAS/agas@uni-koblenz.de, Julian Giesen/jgiesen@uni-koblenz.de, David Gossow</author>
+  <maintainer email="jgiesen@uni-koblenz.de">Julian Giesen</maintainer>
+  <maintainer email="mvsteimker@uni-koblenz.de">Matthias von Steimker</maintainer>  <!--reviewer -->
+  <license>LGPLv3</license>
+  <!--<logo>http://www.uni-koblenz-landau.de/koblenz/fb4/institute/icv/agpaulus/logo_institut.jpg</logo>-->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>cmake_modules</build_depend>
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>festival-dev</build_depend>
+  <build_depend>festival</build_depend>
+  <build_depend>genmsg</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>libesd0-dev</build_depend>
+  <build_depend>libestools-dev</build_depend>
+  <build_depend>libogre-dev</build_depend>
+  <build_depend>libopencv-dev</build_depend>
+  <build_depend>libpulse-dev</build_depend>
+  <build_depend>libqt4-dev</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>roscpp_serialization</build_depend>
+  <build_depend>roslang</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+
+  <run_depend>cv_bridge</run_depend>
+  <run_depend>festival</run_depend>
+  <run_depend>festival-dev</run_depend>
+  <run_depend>libesd0-dev</run_depend>
+  <run_depend>libestools-dev</run_depend>
+  <run_depend>libogre-dev</run_depend>
+  <run_depend>libopencv-dev</run_depend>
+  <run_depend>libpulse-dev</run_depend>
+  <run_depend>libqt4-dev</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>roscpp_serialization</run_depend>
+  <run_depend>roslib</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+</package>
+
+

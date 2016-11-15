@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 2.8.3)
 
-project(robot_face)
+project(homer_robot_face)
 
-find_package(catkin REQUIRED 
+find_package(catkin REQUIRED COMPONENTS 
 	roscpp
 	roslib
 	std_msgs
@@ -20,34 +20,30 @@ find_package(catkin REQUIRED
 #set the default path for built libraries to the "lib" directory
 #set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 # Use OGRE from ROS
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} /usr/share/OGRE/cmake/modules)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem ${ogre_PACKAGE_PATH}/ogre/include/OGRE")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isystem ${ogre_PACKAGE_PATH}/ogre/include/OGRE")
 # QT related
-set(CMAKE_INCLUDE_PATH "/usr/share/qt4/include")
 set(QT_USE_QTXML TRUE)
-
-add_definitions(-DROS_INDIGO=1)
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
 
 #for face output
-find_package(OGRE)
+find_package(OGRE REQUIRED COMPONENTS RenderSystem_GL)
 #for GUI visualization
-find_package(Qt4 REQUIRED COMPONENTS QtCore QtGui)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets X11Extras)
 #for speak out
-find_package(Festival)
+find_package(Festival REQUIRED)
 #festival depends on that
-find_package(EST)
+find_package(EST REQUIRED)
 #for resizing image
 find_package(OpenCV REQUIRED)
 
 add_message_files(
 	FILES
-		ImageDisplay.msg
-		ImageFileDisplay.msg
+		DisplayImage.msg
+		DisplayImageFile.msg
 )
 
 generate_messages(
@@ -66,21 +62,26 @@ set(CMAKE_BUILD_TYPE Release)
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
-include_directories(include
+#get_cmake_property(_variableNames VARIABLES)
+#foreach (_variableName ${_variableNames})
+#	message(STATUS "${_variableName}=${${_variableName}}")
+#endforeach()
+include_directories(
+	include
 	SYSTEM
 	${catkin_INCLUDE_DIRS}
-	${QT_INCLUDE_DIR}
+	${Qt5Core_INCLUDE_DIRS}
+	${Qt5Widgets_INCLUDE_DIRS}
+	${Qt5X11Extras_INCLUDE_DIRS}
 	${Festival_INCLUDE_DIR}
 	${EST_INCLUDE_DIR}
 	${OGRE_INCLUDE_DIR}
 	#/usr/include/OGRE/
-	#../../../../experimental/Libraries/
-	#$ENV{HOMER_DIR}
 )
-include(${QT_USE_FILE}) 
+#include(${QT_USE_FILE}) 
 
 catkin_package(
-		CATKIN_DEPENDS roscpp message_runtime std_msgs sensor_msgs
+	CATKIN_DEPENDS roscpp message_runtime std_msgs sensor_msgs
 )
 
 ## Declare source files
@@ -96,18 +97,18 @@ set(RobotFace_SRC
 	src/ImageDisplay.cpp
 )
 
-# Declare header files (needed to specify all include files for wrapping with QT4)
+# Declare header files (needed to specify all include files for wrapping with QT5)
 set(RobotFace_INC
-	include/MainWindow.h
-	include/TalkingHead.h
-	include/TextOutDisplay.h
-	include/QtRosNode.h
-	include/FestivalGenerator.h
-	include/RotationLabel.h
-	include/ImageDisplay.h
+	include/homer_robot_face/MainWindow.h
+	include/homer_robot_face/TalkingHead.h
+	include/homer_robot_face/TextOutDisplay.h
+	include/homer_robot_face/QtRosNode.h
+	include/homer_robot_face/FestivalGenerator.h
+	include/homer_robot_face/RotationLabel.h
+	include/homer_robot_face/ImageDisplay.h
 )
 
-QT4_WRAP_CPP(RobotFace_MOC_SRC ${RobotFace_INC})
+QT5_WRAP_CPP(RobotFace_MOC_SRC ${RobotFace_INC})
 
 add_executable(FestivalSynthesizer src/FestivalSynthesizer.cpp src/TextProcessor.cpp )
 add_executable(RobotFace ${RobotFace_SRC} ${RobotFace_MOC_SRC})
@@ -117,7 +118,7 @@ list(APPEND Festival_LIBRARIES curses)
 
 
 
-add_dependencies(RobotFace ${PROJECT_NAME}_gencpp roscpp_serialization)
+add_dependencies(RobotFace ${PROJECT_NAME}_gencpp)
 
 target_link_libraries(FestivalSynthesizer
 	${catkin_LIBRARIES}
@@ -128,16 +129,15 @@ target_link_libraries(FestivalSynthesizer
 
 target_link_libraries(RobotFace
 	${catkin_LIBRARIES}
-	${QT_LIBRARIES}
+	${Qt5Core_LIBRARIES}
+	${Qt5Widgets_LIBRARIES}
+	${Qt5X11Extras_LIBRARIES}
 	${OGRE_LIBRARIES}
+	/usr/lib/x86_64-linux-gnu/OGRE-1.9.0/RenderSystem_GL.so
 	${Festival_LIBRARIES}
 	${EST_LIBRARIES}
 	pthread
 )
-
-install(TARGETS FestivalSynthesizer DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-install(TARGETS RobotFace DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-install(DIRECTORY include/ DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 
 #############
 ## Testing ##

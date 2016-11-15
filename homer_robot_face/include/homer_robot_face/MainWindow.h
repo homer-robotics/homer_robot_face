@@ -22,14 +22,14 @@
 #ifndef TALKING_HEAD_INCLUDE_MAINWINDOW_H_
 #define TALKING_HEAD_INCLUDE_MAINWINDOW_H_
 
-#include <QWidget>
+#include <QtWidgets>
 
 #include <ros/ros.h>
 
-#include "TalkingHead.h"
-#include "TextOutDisplay.h"
-#include "FestivalGenerator.h"
-#include "ImageDisplay.h"
+#include <homer_robot_face/TalkingHead.h>
+#include <homer_robot_face/TextOutDisplay.h>
+#include <homer_robot_face/FestivalGenerator.h>
+#include <homer_robot_face/ImageDisplay.h>
 
 /**
  * @class  MainWindow

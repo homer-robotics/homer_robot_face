@@ -22,8 +22,8 @@
 #ifndef TALKING_HEAD_INCLUDE_TEXTOUTDISPLAY_H_
 #define TALKING_HEAD_INCLUDE_TEXTOUTDISPLAY_H_
 
-#include "RotationLabel.h"
-#include "TextProcessor.h"
+#include <homer_robot_face/RotationLabel.h>
+#include <homer_robot_face/TextProcessor.h>
 
 #include <QWidget>
 
@@ -61,6 +61,12 @@ class TextOutDisplay : public QWidget
     void setText( std::string text );
 
     void clearText();
+
+    void setTimer(int msec);
+
+  signals:
+
+    void timerChanged(int msec);
 
   private:
 

@@ -19,15 +19,15 @@
  *  MA 02110-1301  USA or see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-#include "TalkingHead.h"
-#include "TextProcessor.h"
+#include <homer_robot_face/TalkingHead.h>
+#include <homer_robot_face/TextProcessor.h>
 
 //#include "MainWindow.h" //needed for checking on processed images for visualize stream
 
 #if defined(Q_WS_WIN)
 #include <windows.h>  // needed for WindowFromDC()
 #else
-#include <Qt/qx11info_x11.h>
+#include <QX11Info>
 #include <X11/Xlib.h>
 #endif
 
@@ -46,8 +46,6 @@ TalkingHead::TalkingHead( QWidget* parent, std::string mesh_string, std::vector<
     scene_manager_( 0 ),
     shut_down_( false ),
     window_( 0 ),
-    mesh_( 0 ),
-    material_( 0 ),
     pose_list_( 0 ),
     num_sub_meshes_( 0 ),
     anim_set_( 0 ),
@@ -74,6 +72,7 @@ TalkingHead::TalkingHead( QWidget* parent, std::string mesh_string, std::vector<
     setMinimumSize( 100, 100 );
     redraw_timer_ = new QTimer ( this );  // create internal timer
     connect ( redraw_timer_, SIGNAL ( timeout() ), SLOT ( updateOverlay() ) );
+    connect ( this, SIGNAL( timerChanged(int) ), SLOT( setTimer(int) ) );
     //redraw_timer_->start( 1 );
 
     connect( this, SIGNAL(faceCleared()), SLOT( clearFace()) );
@@ -116,7 +115,7 @@ void TalkingHead::updateOverlay()
     if( init_ )
     {
         ROS_INFO("hallo talkinghead");
-        redraw_timer_->start( 1 );
+        emit timerChanged( 1 );
         init_ = false;
         is_visible_ = true;
     }
@@ -250,11 +249,9 @@ void TalkingHead::initOgreSystem( void )
     Ogre::NameValuePairList viewConfig;
     Ogre::String winHandle;
 
-    QX11Info xInfo = x11Info();
-
     viewConfig[ "monitorIndex" ] = "2";
-    winHandle = Ogre::StringConverter::toString ( (unsigned long)xInfo.display() ) +
-           ":" + Ogre::StringConverter::toString ( (unsigned int)xInfo.screen() ) +
+    winHandle = Ogre::StringConverter::toString ( (unsigned long)QX11Info::display() ) +
+           ":" + Ogre::StringConverter::toString ( (unsigned int)QX11Info::appScreen() ) +
            ":" + Ogre::StringConverter::toString ( (unsigned long)nativeParentWidget()->effectiveWinId() );
 
     viewConfig[ "externalWindowHandle" ] = winHandle;
@@ -450,11 +447,7 @@ void TalkingHead::createAnimations( std::string mesh_file )
         for( int curSubMesh = 1; curSubMesh <= num_sub_meshes_; curSubMesh++ )
         {
             Ogre::VertexData* vertexData = mesh_->getVertexDataByTrackHandle( curSubMesh );  // main submesh
-#ifdef ROS_INDIGO
             Ogre::VertexDeclaration* newDeclaration = vertexData->vertexDeclaration->getAutoOrganisedDeclaration( needSkeletalAnimation, needVertexAnimation, false );
-#else
-            Ogre::VertexDeclaration* newDeclaration = vertexData->vertexDeclaration->getAutoOrganisedDeclaration( needSkeletalAnimation, needVertexAnimation );
-#endif
             vertexData->reorganiseBuffers( newDeclaration );
 
             for( unsigned int curPoseIndex = 0; curPoseIndex < mesh_->getPoseCount(); curPoseIndex++ )
@@ -494,31 +487,31 @@ void TalkingHead::changeMaterialColor()
     std::vector<float> iris_color = material_vector_.at(1);
     std::vector<float> outline_color = material_vector_.at(2);
 
-    material_ = Ogre::MaterialManager::getSingleton().load("Head", mesh_string_);
+    material_ = Ogre::MaterialManager::getSingleton().load("Head", mesh_string_).staticCast<Ogre::Material>();
     Ogre::Technique* tech = material_->createTechnique();
     Ogre::Pass* pass = tech->createPass();
     pass = material_->getTechnique(0)->getPass(0);
     pass->setDiffuse(Ogre::ColourValue(head_color.at(0), head_color.at(1), head_color.at(2), 1.0));
 
-    material_ = Ogre::MaterialManager::getSingleton().load("Iris", mesh_string_);
+    material_ = Ogre::MaterialManager::getSingleton().load("Iris", mesh_string_).staticCast<Ogre::Material>();
     tech = material_->createTechnique();
     pass = tech->createPass();
     pass = material_->getTechnique(0)->getPass(0);
     pass->setDiffuse(Ogre::ColourValue(iris_color.at(0), iris_color.at(1), iris_color.at(2), 1.0));
 
-    material_ = Ogre::MaterialManager::getSingleton().load("Mouth", mesh_string_);
+    material_ = Ogre::MaterialManager::getSingleton().load("Mouth", mesh_string_).staticCast<Ogre::Material>();
     tech = material_->createTechnique();
     pass = tech->createPass();
     pass = material_->getTechnique(0)->getPass(0);
     pass->setDiffuse(Ogre::ColourValue(outline_color.at(0), outline_color.at(1), outline_color.at(2), 1.0));
 
-    material_ = Ogre::MaterialManager::getSingleton().load("EyeBrows", mesh_string_);
+    material_ = Ogre::MaterialManager::getSingleton().load("EyeBrows", mesh_string_).staticCast<Ogre::Material>();
     tech = material_->createTechnique();
     pass = tech->createPass();
     pass = material_->getTechnique(0)->getPass(0);
     pass->setDiffuse(Ogre::ColourValue(outline_color.at(0), outline_color.at(1), outline_color.at(2), 1.0));
 
-    material_ = Ogre::MaterialManager::getSingleton().load("Eyes", mesh_string_);
+    material_ = Ogre::MaterialManager::getSingleton().load("Eyes", mesh_string_).staticCast<Ogre::Material>();
     tech = material_->createTechnique();
     pass = tech->createPass();
     pass = material_->getTechnique(0)->getPass(0);
@@ -1059,25 +1052,30 @@ void TalkingHead::callbackResetAnimation( const std_msgs::String::ConstPtr& msg)
     viseme_map_.clear();
 }
 
-void TalkingHead::callbackShowStream( const robot_face::ImageDisplay::ConstPtr& image_msg  )
+void TalkingHead::callbackShowStream( const homer_robot_face::DisplayImage::ConstPtr& image_msg  )
 {
     emit faceCleared();
-    redraw_timer_->start( image_msg->time * 1000 );
+    emit timerChanged( image_msg->time * 1000 );
 }
 
-void TalkingHead::callbackShowImage( const robot_face::ImageFileDisplay::ConstPtr& msg )
+void TalkingHead::callbackShowImage( const homer_robot_face::DisplayImageFile::ConstPtr& msg )
 {
     emit faceCleared();
-    redraw_timer_->start( msg->time * 1000);
+    emit timerChanged( msg->time * 1000);
 }
 
 void TalkingHead::callbackShowMatImage( const sensor_msgs::ImageConstPtr& msg )
 {
     emit faceCleared();
-    redraw_timer_->start( 1000 );
+    emit timerChanged( 1000 );
 }
 
  void TalkingHead::clearFace()
  {
      setVisible( false );
  }
+
+void TalkingHead::setTimer(int msec)
+{
+  redraw_timer_->start(msec);
+}

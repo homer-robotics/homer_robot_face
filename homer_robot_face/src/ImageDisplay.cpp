@@ -19,7 +19,7 @@
  *  MA 02110-1301  USA or see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-#include "ImageDisplay.h"
+#include <homer_robot_face/ImageDisplay.h>
 
 #include <QPainter>
 #include <cv.h>
@@ -199,7 +199,7 @@ inline QImage ImageDisplay::cvMatToQImage( const cv::Mat &inMat )
 }
 
 
-void ImageDisplay::processImageData(const robot_face::ImageDisplay::ConstPtr& image_msg)
+void ImageDisplay::processImageData(const homer_robot_face::DisplayImage::ConstPtr& image_msg)
 {
     //Get image into OpenCV format..
     cv_bridge::CvImagePtr sensor_img_cv;
@@ -229,10 +229,11 @@ void ImageDisplay::processImageData(const robot_face::ImageDisplay::ConstPtr& im
     //rows == height
 
 
-    if(sensor_img_cv->image.cols > sensor_img_cv->image.rows)
-    {
-        cv::resize( sensor_img_cv->image, resized_img_mat, cv::Size(sensor_img_cv->image.cols, max_image_height_),0,0, cv::INTER_AREA);
-    }
+  //  if(sensor_img_cv->image.cols > sensor_img_cv->image.rows)
+  //  {
+  //      cv::resize( sensor_img_cv->image, resized_img_mat, cv::Size(sensor_img_cv->image.cols, max_image_height_),0,0, cv::INTER_AREA);
+  //  }
+
 
     if(sensor_img_cv->image.cols > max_image_width_)
     {
@@ -240,21 +241,16 @@ void ImageDisplay::processImageData(const robot_face::ImageDisplay::ConstPtr& im
     } else {
         width = sensor_img_cv->image.cols;
     }
-    if(sensor_img_cv->image.rows > max_image_height_)
-    {
-        height = max_image_height_;
-    } else {
-        height = max_image_height_;
-    }
+   // height = max_image_height_;
     //CV_INTER_AREA looks best for shrinked images
-    cv::resize( sensor_img_cv->image, resized_img_mat, cv::Size(width, height),0,0, cv::INTER_AREA);
+    cv::resize( sensor_img_cv->image, resized_img_mat, cv::Size(width, max_image_height_),0,0, cv::INTER_AREA);
 
     // and from OpenCV to QImage
     QImage* image_converted = new QImage( cvMatToQImage(resized_img_mat) );
     image_queue_.push(image_converted);
 }
 
-void ImageDisplay::callbackImageDisplay( const robot_face::ImageDisplay::ConstPtr& image_msg)
+void ImageDisplay::callbackImageDisplay( const homer_robot_face::DisplayImage::ConstPtr& image_msg)
 {
 //    ROS_INFO_STREAM("Received ImageDisplay msg, draw image for " << image_msg->time << " seconds.");
 
@@ -262,7 +258,7 @@ void ImageDisplay::callbackImageDisplay( const robot_face::ImageDisplay::ConstPt
     emit newImageToShow( image_msg->time * 1000 ); //convert milliseconds to seconds
 }
 
-void ImageDisplay::callbackImageFileDisplay( const robot_face::ImageFileDisplay::ConstPtr& image_msg )
+void ImageDisplay::callbackImageFileDisplay( const homer_robot_face::DisplayImageFile::ConstPtr& image_msg )
 {
     ROS_INFO_STREAM("Received ImageFileDisplay msg, draw image '" << image_msg->filename << "' for " << image_msg->time << " seconds.");
 

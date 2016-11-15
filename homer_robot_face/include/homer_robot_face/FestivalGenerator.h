@@ -22,7 +22,7 @@
 #ifndef TALKING_HEAD_INCLUDE_FESTIVALGENERATOR_H_
 #define TALKING_HEAD_INCLUDE_FESTIVALGENERATOR_H_
 
-#include "TextProcessor.h"
+#include <homer_robot_face/TextProcessor.h>
 
 #include <festival.h>
 
@@ -65,6 +65,12 @@ class FestivalGenerator: public QObject
 
         public slots:
                 void run();
+ 
+                void setTimer(int msec);
+
+        signals:
+
+                void timerChanged(int msec);
 
         private:
                 bool                        synth_phonemes_;

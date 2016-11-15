@@ -19,9 +19,9 @@
  *  MA 02110-1301  USA or see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-#include "MainWindow.h"
-#include "QtRosNode.h"
-#include "TalkingHead.h"
+#include <homer_robot_face/MainWindow.h>
+#include <homer_robot_face/QtRosNode.h>
+#include <homer_robot_face/TalkingHead.h>
 
 QtRosNode::QtRosNode(int argc, char *argv[], const char* node_name, MainWindow* main_window, QApplication* app)
 {
@@ -55,24 +55,24 @@ void QtRosNode::subscribeTopics()
 {
   //talking head subscribers
   talking_finished_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 1000, &QtRosNode::callbackTalkingFinished, this );
-  emotion_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/speak", 1000, &TalkingHead::callbackTextForEmotion , main_window_->getFaceWidget() );
+  emotion_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/text_out", 1000, &TalkingHead::callbackTextForEmotion , main_window_->getFaceWidget() );
   face_talking_finished_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 1000, &TalkingHead::callbackResetAnimation, main_window_->getFaceWidget());
   //face_image_stream_show_subscriber_ = node_handle_->subscribe<std_msgs::Int8>( "/robot_face/image_stream", 1000, &TalkingHead::callbackShowStream, main_window_->getFaceWidget() );
-  face_image_stream_show_subscriber_ = node_handle_->subscribe<robot_face::ImageDisplay>( "/robot_face/ImageDisplay", 10, &TalkingHead::callbackShowStream, main_window_->getFaceWidget() );
-  face_image_display_show_subscriber_ = node_handle_->subscribe<robot_face::ImageFileDisplay>( "/robot_face/ImageFileDisplay", 1000, &TalkingHead::callbackShowImage, main_window_->getFaceWidget() );
+  face_image_stream_show_subscriber_ = node_handle_->subscribe<homer_robot_face::DisplayImage>( "/robot_face/ImageDisplay", 10, &TalkingHead::callbackShowStream, main_window_->getFaceWidget() );
+  face_image_display_show_subscriber_ = node_handle_->subscribe<homer_robot_face::DisplayImageFile>( "/robot_face/ImageFileDisplay", 1000, &TalkingHead::callbackShowImage, main_window_->getFaceWidget() );
 
   // text output subscribers
-  text_out_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/speak", 1000, &TextOutDisplay::callbackText, main_window_->getTextWidget(MainWindow::OUT) );
+  text_out_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/text_out", 1000, &TextOutDisplay::callbackText, main_window_->getTextWidget(MainWindow::OUT) );
   text_talking_finished_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 1000, &TextOutDisplay::callbackTalkingFinished, main_window_->getTextWidget(MainWindow::OUT) );
   user_input_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/recognized_speech", 1000, &TextOutDisplay::callbackText, main_window_->getTextWidget(MainWindow::REC) );
 
   // speak out subscriber
-  synth_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/speak", 1000, &FestivalGenerator::callbackSynth, main_window_->getGenerator() );
+  synth_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/text_out", 1000, &FestivalGenerator::callbackSynth, main_window_->getGenerator() );
   generator_talking_finished_subscriber_ = tf_node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 1000, &FestivalGenerator::callbackTalkingFinished, main_window_->getGenerator() );
 
   // image subscribers
-  image_stream_subscriber_= node_handle_->subscribe<robot_face::ImageDisplay>( "/robot_face/ImageDisplay", 5, &ImageDisplay::callbackImageDisplay, main_window_->getImageStream() );
-  image_file_display_subscriber_ =  node_handle_->subscribe<robot_face::ImageFileDisplay>( "/robot_face/ImageFileDisplay", 1000, &ImageDisplay::callbackImageFileDisplay, main_window_->getImageStream() );
+  image_stream_subscriber_= node_handle_->subscribe<homer_robot_face::DisplayImage>( "/robot_face/ImageDisplay", 5, &ImageDisplay::callbackImageDisplay, main_window_->getImageStream() );
+  image_file_display_subscriber_ =  node_handle_->subscribe<homer_robot_face::DisplayImageFile>( "/robot_face/ImageFileDisplay", 1000, &ImageDisplay::callbackImageFileDisplay, main_window_->getImageStream() );
 
 
 }

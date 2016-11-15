@@ -21,8 +21,8 @@
 
 #include <ros/ros.h>
 
-#include "MainWindow.h"
-#include "QtRosNode.h"
+#include <homer_robot_face/MainWindow.h>
+#include <homer_robot_face/QtRosNode.h>
 
 int main( int argc, char *argv[] )
 {

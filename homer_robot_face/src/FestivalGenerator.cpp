@@ -21,7 +21,7 @@
 
 #include <string>
 
-#include "FestivalGenerator.h"
+#include <homer_robot_face/FestivalGenerator.h>
 
 FestivalGenerator::FestivalGenerator ( QObject* parent ) :
     QObject( parent ),
@@ -32,6 +32,7 @@ FestivalGenerator::FestivalGenerator ( QObject* parent ) :
 {
     timer_ = new QTimer ( this );  // create internal timer
     connect ( timer_, SIGNAL ( timeout() ), SLOT ( run() ) );
+    connect( this, SIGNAL( timerChanged(int) ), SLOT( setTimer(int) ) );
     timer_->start( 1000.0 / 25 );
 }
 
@@ -74,14 +75,14 @@ void FestivalGenerator::callbackSynth( const std_msgs::String::ConstPtr& msg )
         synth_phonemes_ = true;
         synth_words_ = true;
         if(!file_ready_)
-            timer_->start( 1000.0 / 25 );
+            emit timerChanged( 1000.0 / 25 );
     }
 }
 
 void FestivalGenerator::callbackTalkingFinished( const std_msgs::String::ConstPtr& msg )
 {
     file_ready_ = false;
-    timer_->start( 1000.0 / 25 );
+    emit timerChanged( 1000.0 / 25 );
 }
 
 void FestivalGenerator::synthPhonemes( std::string text )
@@ -98,7 +99,7 @@ void FestivalGenerator::synthWords( std::string text )
     command << "(set! utt2 (SynthText \"" << text << "\"))";
     festival_eval_command( command.str().c_str() );
     festival_eval_command( "(utt.save.words utt2 \"words.txt\"))" );
-    timer_->start( 100000 );
+    emit timerChanged( 100000 );
 }
 
 bool FestivalGenerator::isFileReady()
@@ -113,4 +114,9 @@ bool FestivalGenerator::isFileReady()
 void FestivalGenerator::setFileReady( bool value )
 {
     file_ready_ = value;
+}
+
+void FestivalGenerator::setTimer(int msec)
+{
+    timer_->start(msec);
 }

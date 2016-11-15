@@ -29,7 +29,7 @@
 #include <stdexcept>
 #include <string>
 
-#include "Data.h"
+#include <homer_robot_face/Data.h>
 
 /**
  * @class  Config

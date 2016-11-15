@@ -18,13 +18,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  *  MA 02110-1301  USA or see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-#include "MainWindow.h"
+#include <homer_robot_face/MainWindow.h>
 
 #include <string>
 #include <vector>
 
 //#include "tools/loadRosConfig.h"
-#include "Config.h"
+#include <homer_robot_face/Config.h>
 
 MainWindow::MainWindow( QWidget* parent ) : 
     QWidget( parent, Qt::FramelessWindowHint ), 
@@ -54,7 +54,7 @@ MainWindow::MainWindow( QWidget* parent ) :
     try
     {
         std::vector< std::vector<float> > material_colors;
-        std::string filename = ros::package::getPath("robot_face")+"/config/config.cfg";
+        std::string filename = ros::package::getPath("homer_robot_face")+"/config/config.cfg";
         const char* cfgFilename = filename.c_str();
 
         Config cfg(cfgFilename);
@@ -129,9 +129,9 @@ MainWindow::MainWindow( QWidget* parent ) :
     festival_generator_ = new FestivalGenerator();
 
     //ImageStreamDisplay
-    image_stream_display_ = new ImageDisplay( window_rotation, windowWidth_, windowHeight_, this );
-    image_stream_display_->setMinimumSize(width,height);
-    image_stream_display_->setMaximumSize( min_width, min_height );
+    image_stream_display_ = new ImageDisplay( window_rotation, windowWidth_, windowHeight_ - 60, this );
+    image_stream_display_->setMinimumSize(width,height-60);
+    image_stream_display_->setMaximumSize( min_width, min_height-60 );
 
     // TextOutputDisplay
     text_out_display_= new TextOutDisplay( 0, 26, false, window_rotation, this );
@@ -381,7 +381,7 @@ int MainWindow::init()
      festival_generator_ = new FestivalGenerator();
 
      //ImageStreamDisplay
-     image_stream_display_ = new ImageDisplay( window_rotation, windowWidth_, windowHeight_, this );
+     image_stream_display_ = new ImageDisplay( window_rotation, windowWidth_, windowHeight_ - 60, this );
      image_stream_display_->setMinimumSize(width,height);
      image_stream_display_->setMaximumSize( min_width, min_height );
 

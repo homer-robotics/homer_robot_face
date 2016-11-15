@@ -22,7 +22,7 @@
 #ifndef TALKING_HEAD_INCLUDE_FESTIVALSYNTHESIZER_H_
 #define TALKING_HEAD_INCLUDE_FESTIVALSYNTHESIZER_H_
 
-#include "TextProcessor.h"
+#include <homer_robot_face/TextProcessor.h>
 
 #include <festival.h>
 

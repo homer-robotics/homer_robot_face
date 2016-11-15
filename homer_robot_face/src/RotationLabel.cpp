@@ -19,7 +19,7 @@
  *  MA 02110-1301  USA or see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-#include "RotationLabel.h"
+#include <homer_robot_face/RotationLabel.h>
 #include <QPainter>
 
 RotationLabel::RotationLabel( QWidget *parent )

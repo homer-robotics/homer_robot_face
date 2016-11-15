@@ -19,8 +19,8 @@
  *  MA 02110-1301  USA or see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-#include "TextOutDisplay.h"
-#include "RotationLabel.h"
+#include <homer_robot_face/TextOutDisplay.h>
+#include <homer_robot_face/RotationLabel.h>
 
 #include <QLabel>
 #include <QPainter>
@@ -53,6 +53,7 @@ TextOutDisplay::TextOutDisplay(int min_height, int font_size, bool user_input, i
 
   reset_timer_ = new QTimer( this );  // create internal timer
   connect( reset_timer_, SIGNAL ( timeout() ), SLOT ( clearText() ) );
+  connect( this, SIGNAL( timerChanged(int) ), SLOT ( setTimer(int) ) );
   reset_timer_->start( 1000 / 25  );
 
   setVisible( false );
@@ -88,7 +89,7 @@ void TextOutDisplay::setText( std::string text )
 {
   if ( text == "" )
   {
-    reset_timer_->start ( 1000 / 25  );
+    emit timerChanged( 1000 / 25  );
   }
   else
   {
@@ -98,7 +99,7 @@ void TextOutDisplay::setText( std::string text )
           text_out_label_->setFont(font_);
           setVisible( true );
           text_out_label_->setText( text.c_str() );
-          reset_timer_->start( 10000 );
+          emit timerChanged( 10000 );
       }
       else
       {
@@ -114,9 +115,14 @@ void TextOutDisplay::setText( std::string text )
           }
           setVisible( true );
           text_out_label_->setText( text.c_str() );
-          reset_timer_->start ( 10000  );
+          emit timerChanged( 10000  );
       }
   }
+}
+
+void TextOutDisplay::setTimer(int msec)
+{
+  reset_timer_->start(msec);
 }
 
 void TextOutDisplay::callbackText( const std_msgs::String::ConstPtr& msg )
@@ -129,12 +135,12 @@ void TextOutDisplay::callbackText( const std_msgs::String::ConstPtr& msg )
     text_ = text_processor_.prepareText( out, TextProcessor::DISPLAY );
     if( user_input_ )
     {
-       reset_timer_->start( text_.length() * 10  );
+      emit timerChanged( text_.length() * 10  );
     }
 }
 
 void TextOutDisplay::callbackTalkingFinished( const std_msgs::String::ConstPtr& msg )
 {
     text_ = "";
-    reset_timer_->start( text_.length() * 100  );
+    emit timerChanged( text_.length() * 100  );
 }
