@@ -24,6 +24,7 @@
   <build_depend>libpulse-dev</build_depend>
   <build_depend>message_generation</build_depend>
   <build_depend>qtbase5-dev</build_depend>
+  <build_depend>libqt5x11extras5-dev</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>roscpp_serialization</build_depend>
   <build_depend>roslang</build_depend>
@@ -40,6 +41,7 @@
   <run_depend>libpulse-dev</run_depend>
   <run_depend>message_runtime</run_depend>
   <run_depend>qtbase5-dev</run_depend>
+  <run_depend>libqt5x11extras5-dev</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>roscpp_serialization</run_depend>
   <run_depend>roslib</run_depend>
