@@ -22,8 +22,8 @@
   <build_depend>libogre-dev</build_depend>
   <build_depend>libopencv-dev</build_depend>
   <build_depend>libpulse-dev</build_depend>
-  <build_depend>libqt4-dev</build_depend>
   <build_depend>message_generation</build_depend>
+  <build_depend>qtbase5-dev</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>roscpp_serialization</build_depend>
   <build_depend>roslang</build_depend>
@@ -31,15 +31,15 @@
   <build_depend>std_msgs</build_depend>
 
   <run_depend>cv_bridge</run_depend>
-  <run_depend>festival</run_depend>
   <run_depend>festival-dev</run_depend>
+  <run_depend>festival</run_depend>
   <run_depend>libesd0-dev</run_depend>
   <run_depend>libestools-dev</run_depend>
   <run_depend>libogre-dev</run_depend>
   <run_depend>libopencv-dev</run_depend>
   <run_depend>libpulse-dev</run_depend>
-  <run_depend>libqt4-dev</run_depend>
   <run_depend>message_runtime</run_depend>
+  <run_depend>qtbase5-dev</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>roscpp_serialization</run_depend>
   <run_depend>roslib</run_depend>
