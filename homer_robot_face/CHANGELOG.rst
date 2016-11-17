@@ -2,8 +2,8 @@
 Changelog for package homer_robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.9 (2016-11-17)
+------------------
 * qt4->qt5 in package.xml
 * Contributors: Niklas Yann Wettengel
 
