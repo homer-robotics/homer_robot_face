@@ -2,6 +2,11 @@
 Changelog for package homer_robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* added libqt5x11extras5-dev dependency
+* Contributors: Niklas Yann Wettengel
+
 1.0.9 (2016-11-17)
 ------------------
 * qt4->qt5 in package.xml
