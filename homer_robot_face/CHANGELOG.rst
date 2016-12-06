@@ -2,6 +2,12 @@
 Changelog for package homer_robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* homer_robot_face: added homer_mary_tts dependency
+* homer_robot_face: install everything
+* Contributors: Niklas Yann Wettengel
+
 1.0.10 (2016-11-17)
 -------------------
 * added libqt5x11extras5-dev dependency
