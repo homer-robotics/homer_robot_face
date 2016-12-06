@@ -2,8 +2,8 @@
 Changelog for package homer_mary_tts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.11 (2016-12-06)
+-------------------
 
 * added homer_mary_tts
 * Contributors: Niklas Yann Wettengel
