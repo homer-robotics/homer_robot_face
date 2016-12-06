@@ -46,7 +46,7 @@
   <run_depend>dynamic_reconfigure</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>rospy</run_depend>
-  <run_depend>python-audio</run_depend>
+  <run_depend>python-pyaudio</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
