@@ -47,6 +47,7 @@
   <run_depend>roslib</run_depend>
   <run_depend>sensor_msgs</run_depend>
   <run_depend>std_msgs</run_depend>
+  <run_depend>homer_mary_tts</run_depend>
 </package>
 
 
