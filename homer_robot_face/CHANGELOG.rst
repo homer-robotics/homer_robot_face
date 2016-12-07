@@ -2,6 +2,11 @@
 Changelog for package homer_robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* latest changes from homer-repo
+* Contributors: Niklas Yann Wettengel
+
 1.0.11 (2016-12-06)
 -------------------
 * homer_robot_face: added homer_mary_tts dependency
