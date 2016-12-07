@@ -2,8 +2,8 @@
 Changelog for package homer_robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.13 (2016-12-07)
+-------------------
 * latest changes from homer-repo
 * Contributors: Niklas Yann Wettengel
 
