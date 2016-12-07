@@ -108,7 +108,7 @@ void QtRosNode::run()
     }
 
 
-#define ROCKIN_HACK
+//#define ROCKIN_HACK
 #ifdef ROCKIN_HACK
 	//turn off mic while talking // RoCKIn hack
 	std::string mic_volume_command = "";
