@@ -2,8 +2,8 @@
 Changelog for package homer_robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.14 (2016-12-14)
+-------------------
 * fixed missing RenderSystem_GL error
 * Contributors: Niklas Yann Wettengel
 
