@@ -31,6 +31,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
 #for face output
 find_package(OGRE REQUIRED COMPONENTS RenderSystem_GL)
+add_definitions( -DOGRE_PLUGIN_PATH="/usr/lib/x86_64-linux-gnu/OGRE-1.9.0")
 #for GUI visualization
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets X11Extras)
 #for speak out
@@ -133,7 +134,7 @@ target_link_libraries(RobotFace
 	${Qt5Widgets_LIBRARIES}
 	${Qt5X11Extras_LIBRARIES}
 	${OGRE_LIBRARIES}
-	/usr/lib/x86_64-linux-gnu/OGRE-1.9.0/RenderSystem_GL.so
+	#/usr/lib/x86_64-linux-gnu/OGRE-1.9.0/RenderSystem_GL.so
 	${Festival_LIBRARIES}
 	${EST_LIBRARIES}
 	pthread
