@@ -2,8 +2,8 @@
 Changelog for package homer_mary_tts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.15 (2017-03-10)
+-------------------
 * don't die on empty speak output - resort mic mute - give right message on talking finished
 * mic mute raphael
 * Contributors: Florian Polster, Lisa
