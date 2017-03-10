@@ -2,6 +2,13 @@
 Changelog for package homer_robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.15 (2017-03-10)
+-------------------
+* expected input added to robot face
+* right talking finished text output handleing
+* smaller queue sizes
+* Contributors: Florian Polster, Lisa
+
 1.0.14 (2016-12-14)
 -------------------
 * fixed missing RenderSystem_GL error

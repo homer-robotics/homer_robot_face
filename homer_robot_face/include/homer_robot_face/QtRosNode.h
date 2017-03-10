@@ -90,6 +90,7 @@ class QtRosNode : public QThread {
   ros::Subscriber     text_talking_finished_subscriber_;
   ros::Subscriber     text_out_subscriber_;
   ros::Subscriber     user_input_subscriber_;
+  ros::Subscriber     expected_input_subscriber_;
   ros::Subscriber     synth_subscriber_;
   ros::Subscriber     talking_finished_subscriber_;
   ros::Subscriber     image_stream_subscriber_;
