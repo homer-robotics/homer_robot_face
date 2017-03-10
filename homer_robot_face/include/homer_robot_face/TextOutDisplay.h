@@ -70,8 +70,6 @@ class TextOutDisplay : public QWidget
 
   private:
 
-    std::string                 text_;
-
     RotationLabel               *text_out_label_;
     QFont                       font_;
 

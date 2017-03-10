@@ -73,8 +73,6 @@ void QtRosNode::subscribeTopics()
   // image subscribers
   image_stream_subscriber_= node_handle_->subscribe<homer_robot_face::DisplayImage>( "/robot_face/ImageDisplay", 5, &ImageDisplay::callbackImageDisplay, main_window_->getImageStream() );
   image_file_display_subscriber_ =  node_handle_->subscribe<homer_robot_face::DisplayImageFile>( "/robot_face/ImageFileDisplay", 10, &ImageDisplay::callbackImageFileDisplay, main_window_->getImageStream() );
-
-
 }
 
 void QtRosNode::quitNow()
@@ -90,7 +88,7 @@ void QtRosNode::run()
   {
     if( talking_finished_ )
       text_out_callback_queue_.callOne(ros::WallDuration());
-
+    
     if( tf_text_ == "talking_finished")
       tf_callback_queue_.callOne(ros::WallDuration());
 
@@ -143,6 +141,6 @@ void QtRosNode::run()
 
 void QtRosNode::callbackTalkingFinished(const std_msgs::String::ConstPtr& msg)
 {
-  tf_text_ = msg->data;
+  tf_text_ = "talking_finished";
   talking_finished_ = true;
 }
