@@ -1,3 +1,28 @@
+## homer_robot_face (kinetic) - 1.0.15-0
+
+The packages in the `homer_robot_face` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release --rosdistro kinetic --track kinetic homer_robot_face` on `Fri, 10 Mar 2017 17:47:35 -0000`
+
+These packages were released:
+- `homer_mary_tts`
+- `homer_robot_face`
+
+Version of package(s) in repository `homer_robot_face`:
+
+- upstream repository: git@gitlab.uni-koblenz.de:robbie/homer_robot_face.git
+- release repository: git@gitlab.uni-koblenz.de:robbie/homer_robot_face.git
+- rosdistro version: `1.0.14-0`
+- old version: `1.0.14-0`
+- new version: `1.0.15-0`
+
+Versions of tools used:
+
+- bloom version: `0.5.23`
+- catkin_pkg version: `0.2.10`
+- rosdep version: `0.11.5`
+- rosdistro version: `0.5.0`
+- vcstools version: `0.1.39`
+
+
 ## homer_robot_face (kinetic) - 1.0.14-0
 
 The packages in the `homer_robot_face` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release --rosdistro kinetic --track kinetic homer_robot_face` on `Wed, 14 Dec 2016 17:32:43 -0000`
