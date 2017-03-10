@@ -87,19 +87,20 @@ class MarryTTsSpeak:
       self.text_queue.append(data.data)
       while self.text_queue[0] != data.data:
           rospy.sleep(0.5)
-      self.retrive_wav("/tmp/lisa_speak", self.text_queue[0])
-      os.system("amixer set Capture nocap")
-      self.play_wav_file("/tmp/lisa_speak")
+      if self.text_queue[0].strip() != "":
+          self.retrive_wav("/tmp/lisa_speak", self.text_queue[0])
+          os.system("amixer set Capture nocap")
+          self.play_wav_file("/tmp/lisa_speak")
       msg = String()
-      rospy.sleep(0.5)
-      os.system("amixer set Capture 100%")
-      os.system("amixer set Capture cap")
+      msg.data = self.text_queue[0]
       self.text_queue.pop(0)
       self.talking_finished_pub.publish(msg)
+      rospy.sleep(0.2)
+      os.system("amixer set Capture 100%")
+      os.system("amixer set Capture cap")
 
 rospy.init_node('mary_tts')
 MarryTTsSpeak()
-rospy.sleep(1.0)
 rospy.loginfo("mary tts node. This node assumes that the mary httpserver \
         is runing on port 59125")
 rospy.spin()
