@@ -29,10 +29,10 @@
 
 #include <string>
 
-TextOutDisplay::TextOutDisplay(int min_height, int font_size, bool user_input, int text_rotation, QWidget* parent) :
+TextOutDisplay::TextOutDisplay(int min_height, int font_size, int type, int text_rotation, QWidget* parent) :
     QWidget( parent )
 {
-  user_input_ = user_input;
+  type_ = type;
 
   QBoxLayout* layout = new QVBoxLayout( this );
 
@@ -76,17 +76,25 @@ void TextOutDisplay::setText( std::string text )
 {
   if ( text == "" )
   {
-    emit timerChanged(40);
+      if(type_ == ::EXP)
+      {
+          setVisible(false);
+          return;
+      }
+      emit timerChanged(40);
   }
   else
   {
-      if( user_input_ )
+      if( type_ == ::REC  || type_ == ::EXP)
       {
           font_.setPixelSize( 18 );
           text_out_label_->setFont(font_);
           setVisible( true );
           text_out_label_->setText( text.c_str() );
-          emit timerChanged( 2000);
+          if(type_ == ::REC)
+          {
+              emit timerChanged( 2000);
+          }
       }
       else
       {

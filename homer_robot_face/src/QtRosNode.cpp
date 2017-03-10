@@ -66,6 +66,9 @@ void QtRosNode::subscribeTopics()
   text_talking_finished_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 10, &TextOutDisplay::callbackTalkingFinished, main_window_->getTextWidget(MainWindow::OUT) );
   user_input_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/recognized_speech", 10, &TextOutDisplay::callbackText, main_window_->getTextWidget(MainWindow::REC) );
 
+  // expected Input subscriber
+  expected_input_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/robot_face/expected_input", 10, &TextOutDisplay::callbackText, main_window_->getTextWidget(MainWindow::EXP) );
+  
   // speak out subscriber
   synth_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/text_out", 10, &FestivalGenerator::callbackSynth, main_window_->getGenerator() );
   generator_talking_finished_subscriber_ = tf_node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 10, &FestivalGenerator::callbackTalkingFinished, main_window_->getGenerator() );

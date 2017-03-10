@@ -51,7 +51,8 @@ public:
 
     enum textdisplay {
         OUT,
-        REC
+        REC,
+        EXP
     };
 
     TalkingHead*        getFaceWidget();
@@ -70,6 +71,8 @@ private:
 
     TalkingHead*            talking_head_;
 
+
+    TextOutDisplay*         expc_inp_display_;
     TextOutDisplay*         text_out_display_;
     TextOutDisplay*         text_rec_display_;
 
