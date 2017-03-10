@@ -88,10 +88,12 @@ class MarryTTsSpeak:
       while self.text_queue[0] != data.data:
           rospy.sleep(0.5)
       self.retrive_wav("/tmp/lisa_speak", self.text_queue[0])
-      os.system("amixer set Capture 0%")
+      os.system("amixer set Capture nocap")
       self.play_wav_file("/tmp/lisa_speak")
       msg = String()
+      rospy.sleep(0.5)
       os.system("amixer set Capture 100%")
+      os.system("amixer set Capture cap")
       self.text_queue.pop(0)
       self.talking_finished_pub.publish(msg)
 
