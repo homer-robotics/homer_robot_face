@@ -1,6 +1,6 @@
 <package>
   <name>homer_robot_face</name>
-  <version>1.0.15</version>
+  <version>1.0.16</version>
   <description> 
      An application to display a talking head on your robot for human robot interaction.
   </description>
