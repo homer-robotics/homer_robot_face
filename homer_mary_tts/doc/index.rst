@@ -11,6 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
    mary_tts
+   modules
 
 
 
