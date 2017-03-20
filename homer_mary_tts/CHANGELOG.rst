@@ -2,6 +2,11 @@
 Changelog for package homer_mary_tts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* added generated python module api doc
+* Contributors: Niklas Yann Wettengel
+
 1.0.15 (2017-03-10)
 -------------------
 * don't die on empty speak output - resort mic mute - give right message on talking finished
