@@ -2,8 +2,8 @@
 Changelog for package homer_mary_tts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.17 (2017-03-20)
+-------------------
 * added generated python module api doc
 * Contributors: Niklas Yann Wettengel
 
