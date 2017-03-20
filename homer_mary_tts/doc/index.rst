@@ -10,9 +10,9 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
+
    mary_tts
    modules
-
 
 
 Indices and tables

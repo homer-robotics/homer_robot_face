@@ -1,7 +1,7 @@
 mary_tts module
 ===============
 
-.. automodule:: mary_tts
+.. automodule:: homer_mary_tts
     :members:
     :undoc-members:
     :show-inheritance:
