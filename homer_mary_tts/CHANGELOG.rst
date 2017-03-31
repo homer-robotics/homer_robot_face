@@ -2,8 +2,8 @@
 Changelog for package homer_mary_tts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.18 (2017-03-31)
+-------------------
 * test
 * homer_mary_tts: added mary_tts to doc toc
 * Contributors: Niklas Yann Wettengel

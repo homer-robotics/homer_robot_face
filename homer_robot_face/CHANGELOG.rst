@@ -2,8 +2,8 @@
 Changelog for package homer_robot_face
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.18 (2017-03-31)
+-------------------
 * bigger text size for expected input
 * Contributors: Lisa
 
