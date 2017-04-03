@@ -85,16 +85,13 @@ void TextOutDisplay::setText( std::string text )
   }
   else
   {
-      if( type_ == ::REC  || type_ == ::EXP)
+      if( type_ == ::REC)
       {
           font_.setPixelSize( 18 );
           text_out_label_->setFont(font_);
           setVisible( true );
           text_out_label_->setText( text.c_str() );
-          if(type_ == ::REC)
-          {
-              emit timerChanged( 2000);
-          }
+          emit timerChanged( 2000);
       }
       else
       {
@@ -110,7 +107,10 @@ void TextOutDisplay::setText( std::string text )
           }
           setVisible( true );
           text_out_label_->setText( text.c_str() );
-          emit timerChanged( 10000 );
+          if( type_ != ::EXP)
+          {
+              emit timerChanged( 10000 );
+          }
       }
   }
 }
