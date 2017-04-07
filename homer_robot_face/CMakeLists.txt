@@ -31,7 +31,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
 #for face output
 find_package(OGRE REQUIRED COMPONENTS RenderSystem_GL)
-add_definitions( -DOGRE_PLUGIN_PATH="/usr/lib/x86_64-linux-gnu/OGRE-1.9.0")
+add_definitions( -DOGRE_PLUGIN_PATH="/usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/OGRE-1.9.0")
 #for GUI visualization
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets X11Extras)
 #for speak out
