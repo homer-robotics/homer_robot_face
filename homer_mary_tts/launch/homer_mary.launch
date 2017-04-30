@@ -2,6 +2,5 @@
 	<rosparam command="load" 
 		file="$(find homer_mary_tts)/config/mary_tts.yaml" />
 
-	<node name="homer_mary_tts" pkg="homer_mary_tts" type="mary_tts.py" 
-		output="screen"/>
+	<node name="homer_mary_tts" pkg="homer_mary_tts" type="mary_tts.py"/>
 </launch>
