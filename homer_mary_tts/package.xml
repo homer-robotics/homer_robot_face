@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>homer_mary_tts</name>
-  <version>1.0.20</version>
+  <version>1.0.21</version>
   <description>The homer_mary_tts package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
