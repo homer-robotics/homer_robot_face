@@ -2,6 +2,4 @@
     <!-- Start RobotFace node -->
     <!--<node ns="/robot_face" name="RobotFace" pkg="robot_face" type="RobotFace" cwd="node" output="screen" />-->
     <node ns="/robot_face" name="RobotFace" pkg="homer_robot_face" type="RobotFace" cwd="node"/>
-	<!--node name="FestivalSynthesizer" pkg="homer_robot_face" type="FestivalSynthesizer" cwd="node" output="screen"/-->
-	<include  file="$(find homer_mary_tts)/launch/homer_mary.launch"/>
 </launch>

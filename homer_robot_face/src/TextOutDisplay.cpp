@@ -29,10 +29,10 @@
 
 #include <string>
 
-TextOutDisplay::TextOutDisplay(int min_height, int font_size, bool user_input, int text_rotation, QWidget* parent) :
+TextOutDisplay::TextOutDisplay(int min_height, int font_size, int type, int text_rotation, QWidget* parent) :
     QWidget( parent )
 {
-  user_input_ = user_input;
+  type_ = type;
 
   QBoxLayout* layout = new QVBoxLayout( this );
 
@@ -54,11 +54,10 @@ TextOutDisplay::TextOutDisplay(int min_height, int font_size, bool user_input, i
   reset_timer_ = new QTimer( this );  // create internal timer
   connect( reset_timer_, SIGNAL ( timeout() ), SLOT ( clearText() ) );
   connect( this, SIGNAL( timerChanged(int) ), SLOT ( setTimer(int) ) );
-  reset_timer_->start( 1000 / 25  );
+  //reset_timer_->start( 40 );
 
   setVisible( false );
 
-  text_ = "";
 }
 
 TextOutDisplay::~TextOutDisplay()
@@ -69,37 +68,30 @@ TextOutDisplay::~TextOutDisplay()
 
 void TextOutDisplay::clearText()
 {
-  if( text_ != "" )
-  {
-    setText( text_ );
-    if( user_input_ )
-    {
-        text_ = "";
-    }
-  }
-  else
-  {
-    setText( "" );
     text_out_label_->setText( "" );
     setVisible( false );
-  }
 }
 
 void TextOutDisplay::setText( std::string text )
 {
   if ( text == "" )
   {
-    emit timerChanged( 1000 / 25  );
+      if(type_ == ::EXP)
+      {
+          setVisible(false);
+          return;
+      }
+      emit timerChanged(40);
   }
   else
   {
-      if( user_input_ )
+      if( type_ == ::REC)
       {
           font_.setPixelSize( 18 );
           text_out_label_->setFont(font_);
           setVisible( true );
           text_out_label_->setText( text.c_str() );
-          emit timerChanged( 10000 );
+          emit timerChanged( 2000);
       }
       else
       {
@@ -115,32 +107,25 @@ void TextOutDisplay::setText( std::string text )
           }
           setVisible( true );
           text_out_label_->setText( text.c_str() );
-          emit timerChanged( 10000  );
+          if( type_ != ::EXP)
+          {
+              emit timerChanged( 10000 );
+          }
       }
   }
 }
 
 void TextOutDisplay::setTimer(int msec)
 {
-  reset_timer_->start(msec);
+    reset_timer_->start(msec);
 }
 
 void TextOutDisplay::callbackText( const std_msgs::String::ConstPtr& msg )
 {
-    std::string out = "";
-
-    //    out = "You said: ";
-
-    out.append(msg->data);
-    text_ = text_processor_.prepareText( out, TextProcessor::DISPLAY );
-    if( user_input_ )
-    {
-      emit timerChanged( text_.length() * 10  );
-    }
+    setText( text_processor_.prepareText( msg->data, TextProcessor::DISPLAY ));
 }
 
 void TextOutDisplay::callbackTalkingFinished( const std_msgs::String::ConstPtr& msg )
 {
-    text_ = "";
-    emit timerChanged( text_.length() * 100  );
+    emit timerChanged(  300 );
 }

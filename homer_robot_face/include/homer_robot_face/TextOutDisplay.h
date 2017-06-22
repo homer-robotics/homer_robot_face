@@ -33,6 +33,13 @@
 #include <string>
 #include <vector>
 
+
+enum displayTypes{
+    OUT = 0,
+    REC = 1,
+    EXP = 2
+};
+
 /**
  * @class  TextOutDisplay
  * @brief  Displays the currently spoken sentence
@@ -46,7 +53,7 @@ class TextOutDisplay : public QWidget
   public:
 
     /** Constructor */
-    TextOutDisplay( int min_height = 0, int font_size=15, bool user_input = false, int text_rotation = 0, QWidget* parent = 0 );
+    TextOutDisplay( int min_height = 0, int font_size=15, int type = 0, int text_rotation = 0, QWidget* parent = 0 );
 
     /** Destructor */
     ~TextOutDisplay();
@@ -70,8 +77,6 @@ class TextOutDisplay : public QWidget
 
   private:
 
-    std::string                 text_;
-
     RotationLabel               *text_out_label_;
     QFont                       font_;
 
@@ -79,7 +84,7 @@ class TextOutDisplay : public QWidget
 
     std::vector<std::string>    smileys_;
 
-    bool                        user_input_;
+    int                         type_;
 
     TextProcessor               text_processor_;
 };

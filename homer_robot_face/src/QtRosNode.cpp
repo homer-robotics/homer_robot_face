@@ -54,27 +54,28 @@ QtRosNode::~QtRosNode()
 void QtRosNode::subscribeTopics()
 {
   //talking head subscribers
-  talking_finished_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 1000, &QtRosNode::callbackTalkingFinished, this );
-  emotion_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/text_out", 1000, &TalkingHead::callbackTextForEmotion , main_window_->getFaceWidget() );
-  face_talking_finished_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 1000, &TalkingHead::callbackResetAnimation, main_window_->getFaceWidget());
+  talking_finished_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 10, &QtRosNode::callbackTalkingFinished, this );
+  emotion_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/text_out", 10, &TalkingHead::callbackTextForEmotion , main_window_->getFaceWidget() );
+  face_talking_finished_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 10, &TalkingHead::callbackResetAnimation, main_window_->getFaceWidget());
   //face_image_stream_show_subscriber_ = node_handle_->subscribe<std_msgs::Int8>( "/robot_face/image_stream", 1000, &TalkingHead::callbackShowStream, main_window_->getFaceWidget() );
   face_image_stream_show_subscriber_ = node_handle_->subscribe<homer_robot_face::DisplayImage>( "/robot_face/ImageDisplay", 10, &TalkingHead::callbackShowStream, main_window_->getFaceWidget() );
-  face_image_display_show_subscriber_ = node_handle_->subscribe<homer_robot_face::DisplayImageFile>( "/robot_face/ImageFileDisplay", 1000, &TalkingHead::callbackShowImage, main_window_->getFaceWidget() );
+  face_image_display_show_subscriber_ = node_handle_->subscribe<homer_robot_face::DisplayImageFile>( "/robot_face/ImageFileDisplay", 10, &TalkingHead::callbackShowImage, main_window_->getFaceWidget() );
 
   // text output subscribers
-  text_out_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/text_out", 1000, &TextOutDisplay::callbackText, main_window_->getTextWidget(MainWindow::OUT) );
-  text_talking_finished_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 1000, &TextOutDisplay::callbackTalkingFinished, main_window_->getTextWidget(MainWindow::OUT) );
-  user_input_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/recognized_speech", 1000, &TextOutDisplay::callbackText, main_window_->getTextWidget(MainWindow::REC) );
+  text_out_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/text_out", 10, &TextOutDisplay::callbackText, main_window_->getTextWidget(MainWindow::OUT) );
+  text_talking_finished_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 10, &TextOutDisplay::callbackTalkingFinished, main_window_->getTextWidget(MainWindow::OUT) );
+  user_input_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/recognized_speech", 10, &TextOutDisplay::callbackText, main_window_->getTextWidget(MainWindow::REC) );
 
+  // expected Input subscriber
+  expected_input_subscriber_ = node_handle_->subscribe<std_msgs::String>( "/robot_face/expected_input", 10, &TextOutDisplay::callbackText, main_window_->getTextWidget(MainWindow::EXP) );
+  
   // speak out subscriber
-  synth_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/text_out", 1000, &FestivalGenerator::callbackSynth, main_window_->getGenerator() );
-  generator_talking_finished_subscriber_ = tf_node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 1000, &FestivalGenerator::callbackTalkingFinished, main_window_->getGenerator() );
+  synth_subscriber_ = text_out_node_handle_->subscribe<std_msgs::String>( "/robot_face/text_out", 10, &FestivalGenerator::callbackSynth, main_window_->getGenerator() );
+  generator_talking_finished_subscriber_ = tf_node_handle_->subscribe<std_msgs::String>( "/robot_face/talking_finished", 10, &FestivalGenerator::callbackTalkingFinished, main_window_->getGenerator() );
 
   // image subscribers
   image_stream_subscriber_= node_handle_->subscribe<homer_robot_face::DisplayImage>( "/robot_face/ImageDisplay", 5, &ImageDisplay::callbackImageDisplay, main_window_->getImageStream() );
-  image_file_display_subscriber_ =  node_handle_->subscribe<homer_robot_face::DisplayImageFile>( "/robot_face/ImageFileDisplay", 1000, &ImageDisplay::callbackImageFileDisplay, main_window_->getImageStream() );
-
-
+  image_file_display_subscriber_ =  node_handle_->subscribe<homer_robot_face::DisplayImageFile>( "/robot_face/ImageFileDisplay", 10, &ImageDisplay::callbackImageFileDisplay, main_window_->getImageStream() );
 }
 
 void QtRosNode::quitNow()
@@ -90,7 +91,7 @@ void QtRosNode::run()
   {
     if( talking_finished_ )
       text_out_callback_queue_.callOne(ros::WallDuration());
-
+    
     if( tf_text_ == "talking_finished")
       tf_callback_queue_.callOne(ros::WallDuration());
 
@@ -143,6 +144,6 @@ void QtRosNode::run()
 
 void QtRosNode::callbackTalkingFinished(const std_msgs::String::ConstPtr& msg)
 {
-  tf_text_ = msg->data;
+  tf_text_ = "talking_finished";
   talking_finished_ = true;
 }

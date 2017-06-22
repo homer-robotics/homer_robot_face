@@ -133,12 +133,19 @@ MainWindow::MainWindow( QWidget* parent ) :
     image_stream_display_->setMinimumSize(width,height-60);
     image_stream_display_->setMaximumSize( min_width, min_height-60 );
 
+
+    // ExpectedInputDisplay
+    expc_inp_display_= new TextOutDisplay( 0, 20, ::EXP, window_rotation, this);
+    custom_palette.setColor ( QPalette::WindowText, QColor( 150, 150, 200 ) );
+    expc_inp_display_->setPalette( custom_palette );
+    expc_inp_display_->setMaximumSize( width, height );
+
     // TextOutputDisplay
-    text_out_display_= new TextOutDisplay( 0, 26, false, window_rotation, this );
+    text_out_display_= new TextOutDisplay( 0, 26, ::OUT, window_rotation, this );
     text_out_display_->setMaximumSize( width, height );
 
     // TextRecognitionDisplay
-    text_rec_display_= new TextOutDisplay( 0, 20, true, window_rotation, this );
+    text_rec_display_= new TextOutDisplay( 0, 20, ::REC, window_rotation, this );
     custom_palette.setColor ( QPalette::WindowText, QColor( 200, 150, 150 ) );
     text_rec_display_->setPalette( custom_palette );
     text_rec_display_->setMaximumSize( width, height );
@@ -149,6 +156,8 @@ MainWindow::MainWindow( QWidget* parent ) :
 
     if( window_rotation == 0 || window_rotation == 270 )
     {
+        center_layout->addWidget( expc_inp_display_ );
+        center_layout->addStretch();
         center_layout->addWidget( text_out_display_ );
         center_layout->addStretch();
         center_layout->addWidget( text_rec_display_ );
@@ -185,6 +194,8 @@ MainWindow::MainWindow( QWidget* parent ) :
         center_layout->addWidget( text_rec_display_ );
         center_layout->addStretch();
         center_layout->addWidget( text_out_display_ );
+        center_layout->addStretch();
+        center_layout->addWidget( expc_inp_display_ );
 
         center_layout->setStretchFactor( text_out_display_, 1 );
 
@@ -228,6 +239,7 @@ MainWindow::~MainWindow()
     if( image_stream_display_ ) delete image_stream_display_;
     if( text_out_display_ ) delete text_out_display_;
     if( text_rec_display_ ) delete text_rec_display_;
+    if( expc_inp_display_ ) delete expc_inp_display_; 
 //    if( image_display_ ) delete image_display_;
 }
 
@@ -385,6 +397,12 @@ int MainWindow::init()
      image_stream_display_->setMinimumSize(width,height);
      image_stream_display_->setMaximumSize( min_width, min_height );
 
+     // ExpectedInputDisplay
+     expc_inp_display_= new TextOutDisplay( 0, 20, ::EXP, window_rotation, this);
+     custom_palette.setColor ( QPalette::WindowText, QColor( 150, 150, 200 ) );
+     expc_inp_display_->setPalette( custom_palette );
+     expc_inp_display_->setMaximumSize( width, height );
+
      // TextOutputDisplay
      text_out_display_= new TextOutDisplay( 0, 26, false, window_rotation, this );
      text_out_display_->setMaximumSize( width, height );
@@ -401,6 +419,8 @@ int MainWindow::init()
 
      if( window_rotation == 0 || window_rotation == 270 )
      {
+         center_layout->addWidget( expc_inp_display_ );
+         center_layout->addStretch();
          center_layout->addWidget( text_out_display_ );
          center_layout->addStretch();
          center_layout->addWidget( text_rec_display_ );
@@ -436,6 +456,8 @@ int MainWindow::init()
          center_layout->addWidget( text_rec_display_ );
          center_layout->addStretch();
          center_layout->addWidget( text_out_display_ );
+         center_layout->addStretch();
+         center_layout->addWidget( expc_inp_display_ );
 
          center_layout->setStretchFactor( text_out_display_, 1 );
 
@@ -491,6 +513,10 @@ TextOutDisplay* MainWindow::getTextWidget( textdisplay type )
     if( type == REC )
     {
         return text_rec_display_;
+    }
+    if( type == EXP )
+    {
+        return expc_inp_display_;
     }
     return text_out_display_;
 }
