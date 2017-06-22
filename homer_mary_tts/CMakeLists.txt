@@ -150,6 +150,7 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 install(PROGRAMS
   src/mary_tts.py
+  src/flite_tts.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
