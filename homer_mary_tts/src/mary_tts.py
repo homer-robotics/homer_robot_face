@@ -9,7 +9,7 @@ from std_msgs.msg import String, Empty
 from dynamic_reconfigure.server import Server
 from homer_mary_tts.cfg import MaryTTSConfig
 
-class MarryTTsSpeak:
+class MaryTTSSpeak:
 
   def __init__(self):
     self.text_out_sub = rospy.Subscriber("/robot_face/text_out", String, 
@@ -20,9 +20,10 @@ class MarryTTsSpeak:
     self.dynamic_reconfigure_server = Server(MaryTTSConfig, 
             self.dynamic_reconfigure_callback)
     self.text_queue = []
+    self.muted = True
 
   def dynamic_reconfigure_callback(self, config, level):
-    rospy.loginfo(config)
+    rospy.logdebug(config)
     return config
 
   def speak(self, text):
@@ -50,23 +51,31 @@ class MarryTTsSpeak:
                     voice)
     os.system("curl -s \"" + url + "\" | aplay -q")
 
-
   def speak_callback(self, data):
       self.text_queue.append(data.data)
-      while self.text_queue[0] != data.data:
-          rospy.sleep(0.5)
-      if self.text_queue[0].strip() != "":
+
+  def handle_queue(self):
+      if len(self.text_queue): 
           os.system("amixer -q set Capture nocap")
-          self.speak(self.text_queue[0])
-      msg = String()
-      msg.data = self.text_queue[0]
-      self.text_queue.pop(0)
-      self.talking_finished_pub.publish(msg)
-      rospy.sleep(0.2)
-      os.system("amixer -q set Capture 100%")
-      os.system("amixer -q set Capture cap")
+          self.muted = True
+          if self.text_queue[0].strip() != "":
+              self.speak(self.text_queue[0])
+          msg = String()
+          msg.data = self.text_queue[0]
+          self.talking_finished_pub.publish(msg)
+          self.text_queue.pop(0)
+
+      else:
+          if self.muted:
+              os.system("amixer -q set Capture 100%")
+              os.system("amixer -q set Capture cap")
+              self.muted = False
 
 rospy.init_node('mary_tts')
-MarryTTsSpeak()
+mary = MaryTTSSpeak()
 rospy.loginfo("mary tts node. This node assumes that the mary httpserver is runing on port 59125")
-rospy.spin()
+
+while not rospy.is_shutdown():
+    mary.handle_queue()
+    rospy.sleep(0.2)
+
