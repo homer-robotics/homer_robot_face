@@ -45,6 +45,7 @@ sudo apt-get install libttspico-utils
 Mary TTS bibtex:
 
 
+```
 @article{schroder2003german,
   title={The German text-to-speech synthesis system MARY: A tool for research, development and teaching},
   author={Schr{\"o}der, Marc and Trouvain, J{\"u}rgen},
@@ -55,12 +56,15 @@ Mary TTS bibtex:
   year={2003},
   publisher={Springer}
 }
+```
 
 Flite bibtex:
 
+```
 @inproceedings{black2001flite,
   title={Flite: a small fast run-time synthesis engine},
   author={Black, Alan W and Lenzo, Kevin A},
   booktitle={4th ISCA Tutorial and Research Workshop (ITRW) on Speech Synthesis},
   year={2001}
 }
+```
