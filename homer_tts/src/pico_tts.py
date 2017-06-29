@@ -11,14 +11,14 @@ import wave
 
 from std_msgs.msg import String, Empty
 from dynamic_reconfigure.server import Server
-# from homer_mary_tts.cfg import MaryTTSConfig
+# from homer_tts.cfg import MaryTTSConfig
 
 import rospy
 
 from dynamic_reconfigure.server import Server
 # from dynamic_tutorials.cfg import TutorialsConfig
 # from dynamic_tutorials.cfg import MaryTTSConfig
-from homer_mary_tts.cfg import MaryTTSConfig
+from homer_tts.cfg import MaryTTSConfig
 
 class MarryTTsSpeak:
 

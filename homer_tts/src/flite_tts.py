@@ -6,7 +6,7 @@ import rospy
 from std_msgs.msg import String, Empty
 
 from dynamic_reconfigure.server import Server
-from homer_mary_tts.cfg import MaryTTSConfig
+from homer_tts.cfg import MaryTTSConfig
 
 class FliteSpeak:
 
