@@ -115,7 +115,7 @@ void TalkingHead::updateOverlay()
     if( init_ )
     {
         ROS_INFO("hallo talkinghead");
-        emit timerChanged( 1 );
+        emit timerChanged( 50 );
         init_ = false;
         is_visible_ = true;
     }
@@ -225,7 +225,7 @@ void TalkingHead::initOgreSystem( void )
     }
 
     render_system->setConfigOption( "Full Screen", "No" );
-    render_system->setConfigOption( "FSAA", "16" );
+    render_system->setConfigOption( "FSAA", "0" );
     render_system->setConfigOption( "RTT Preferred Mode", "FBO" );
     render_system->setConfigOption( "VSync", "Yes" );
     render_system->setConfigOption( "sRGB Gamma Conversion", "No" );
@@ -255,7 +255,7 @@ void TalkingHead::initOgreSystem( void )
            ":" + Ogre::StringConverter::toString ( (unsigned long)nativeParentWidget()->effectiveWinId() );
 
     viewConfig[ "externalWindowHandle" ] = winHandle;
-    viewConfig[ "FSAA" ] = "16";
+    viewConfig[ "FSAA" ] = "0";
     viewConfig[ "vsync" ] = "true";
     viewConfig[ "border" ] = "none";
     window_ = root_->createRenderWindow( "RobotFace", width(), height(), false, &viewConfig );
