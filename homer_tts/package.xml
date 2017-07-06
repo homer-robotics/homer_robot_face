@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>homer_tts</name>
-  <version>1.0.24</version>
+  <version>1.0.25</version>
   <description>The homer_tts package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
