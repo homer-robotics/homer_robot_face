@@ -29,7 +29,8 @@ class FliteSpeak:
     os.system("flite -t \""+ text +"\" -voice slt")
 
   def speak_callback(self, data):
-      self.text_queue.append(data.data)
+      if len(self.text_queue) < 10:
+          self.text_queue.append(data.data)
 
   def handle_queue(self):
       if len(self.text_queue): 

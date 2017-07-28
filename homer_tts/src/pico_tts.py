@@ -60,7 +60,8 @@ class MarryTTsSpeak:
     pa.terminate()
 
   def speak_callback(self, data):
-      self.text_queue.append(data.data)
+      if len(self.text_queue) < 10:
+          self.text_queue.append(data.data)
       while self.text_queue[0] != data.data:
           rospy.sleep(0.5)
       self.retrive_wav("/tmp/lisa_speak", self.text_queue[0])
