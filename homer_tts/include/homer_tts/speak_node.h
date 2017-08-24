@@ -19,7 +19,7 @@ enum State
     SPEAKING
 };
 
-typedef actionlib::SimpleActionServer<homer_actions::SpeakAction> Server;
+typedef actionlib::SimpleActionServer<homer_tts::SpeakAction> Server;
 
 class Speak
 {
@@ -34,7 +34,7 @@ class Speak
 	private:
 		// Member Variables
 		ros::NodeHandle m_nh_;
-		homer_actions::SpeakGoal::ConstPtr m_goal;
+		homer_tts::SpeakGoal::ConstPtr m_goal;
 
 		void speakCallback();
 
