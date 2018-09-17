@@ -1,7 +1,0 @@
-<launch>
-	<rosparam command="load" 
-		file="$(find homer_tts)/config/mary_tts.yaml" />
-
-	<node name="homer_mary_tts" pkg="homer_tts" type="mary_tts.py"/>
-	<node name="speak_action" pkg="homer_tts" type="speak"/>
-</launch>
