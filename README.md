@@ -5,6 +5,11 @@
 This package contains a robot face as described in the paper "Enhancing Human-Robot Interaction by a Robot Face with Facial Expressions and Synchronized Lip Movements".
 
 
+### Abstact
+
+With service robots becoming increasingly elaborate for higher level tasks,  human-robot interaction is moving into the focus of robotic research.  In this paper we present an animated robot face as a convenient way of interacting with  robots.   Our  robot face  can  show  7  different facial  expression,  thus providing a  robot with  the ability to express emotions.  This capability is crucial for robots to be accepted as everyday companions in domestic environments.  Aiming towards a more realistic interaction experience our robot face moves its lips synchronously to the synthesized speech.  In a broad user study with 100 subjects we test the emotions conveyed by the robot face.   The results indicate that our robot face enhances human robot interaction by providing the robot with the ability to express emotions.  The presented robot face is highly customizable.  It is available for ROS and can be used with any robot that integrates ROS in its architecture
+
+
 ## Instruction
 
 Launch the face node like:
